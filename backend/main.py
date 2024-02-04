@@ -11,6 +11,7 @@ def handle_download_request():
     """API endpoint to download a YouTube video."""
     data = request.get_json()
     url = data.get("url")
+    print(url)
     if not url:
         return jsonify({"error": "URL is required"}), 400
 
