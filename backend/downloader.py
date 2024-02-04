@@ -3,22 +3,22 @@ import os
 
 
 def download_video(url, output_path="downloads/"):
-    """
-    Download the video from the given URL and save it to the output_path.
-    Returns the filename of the downloaded video.
+    """Download a video from YouTube by URL.
+
+    Args:
+        url (str): The URL of the YouTube video to download.
+        output_path (str): The directory where the video will be saved.
+
+    Returns:
+        str: The filename of the downloaded video.
     """
     yt = YouTube(url)
-    video = yt.streams.filter(progressive=True, file_extension="mp4").first()
+    video = yt.streams.get_highest_resolution()
     if not os.path.exists(output_path):
         os.makedirs(output_path)
     return video.download(output_path=output_path)
 
 
-def convert_video_to_audio(video_path, output_format="wav"):
-    """
-    Convert the downloaded video to an audio file with the specified format.
-    Returns the filename of the converted audio file.
-    """
-    # Conversion logic goes here. You can use moviepy or call FFmpeg directly.
-    # This is just a placeholder function to illustrate the concept.
-    pass
+# Optionally, you could include more functionality here, such as:
+# - A function to extract audio from the downloaded video.
+# - Functions to handle specific video formats or qualities.
